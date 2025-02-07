@@ -9,13 +9,16 @@
     "lint": "next lint",
     "Data": "node scripts/importTemplate7Data.mjs"
   },
+  "engines": {
+    "node": "16.x"
+  },
   "dependencies": {
     "@sanity/image-url": "^1.1.0",
     "@sanity/vision": "^3.71.0",
     "axios": "^1.7.9",
     "clsx": "^2.1.1",
     "dotenv": "^16.4.7",
-    "next": "15.0.4",
+    "next": "^15.1.6",
     "next-sanity": "^9.8.39",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
@@ -23,7 +26,8 @@
     "sanity": "^3.71.0",
     "styled-components": "^6.1.14",
     "tailwind-merge": "^2.6.0",
-    "tailwindcss-animate": "^1.0.7"
+    "tailwindcss-animate": "^1.0.7",
+    "webpack": "^5.97.1"
   },
   "devDependencies": {
     "@types/node": "^20",
