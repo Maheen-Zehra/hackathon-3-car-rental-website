@@ -3,10 +3,10 @@
 import { useState } from "react";
 
 export default function PickDropForm() {
-  const [pickUpDate, setPickUpDate] = useState("20 July 2022");
-  const [pickUpTime, setPickUpTime] = useState("07.00");
-  const [dropOffDate, setDropOffDate] = useState("21 July 2022");
-  const [dropOffTime, setDropOffTime] = useState("01.00");
+  // const [pickUpDate, setPickUpDate] = useState("20 July 2022");
+  // const [pickUpTime, setPickUpTime] = useState("07.00");
+  // const [dropOffDate, setDropOffDate] = useState("21 July 2022");
+  // const [dropOffTime, setDropOffTime] = useState("01.00");
 
   return (
     <div>

@@ -17,6 +17,7 @@ const Sidebar = () => {
     selectedOptions: string[],
     setSelectedOptions: React.Dispatch<React.SetStateAction<string[]>>
   ) => {
+    selectedOptions
     setSelectedOptions((prev) =>
       prev.includes(option)
         ? prev.filter((item) => item !== option)
@@ -117,6 +118,9 @@ const Sidebar = () => {
           onChange={(e) => setPriceRange(Number(e.target.value))}
           className="w-full accent-blue-500"
         />
+        const priceRange = "100-200";
+
+return <div>{priceRange}</div>;
         <div className="flex justify-between items-center mb-4">
           <span className="space-y-4 text-xl font-semibold text-gray-500">
             Max. ${100}.00
