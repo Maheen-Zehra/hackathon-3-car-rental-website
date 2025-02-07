@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 
 export default function PickDropForm() {
   // const [pickUpDate, setPickUpDate] = useState("20 July 2022");

@@ -17,12 +17,14 @@ const Sidebar = () => {
     selectedOptions: string[],
     setSelectedOptions: React.Dispatch<React.SetStateAction<string[]>>
   ) => {
-    selectedOptions
+   
     setSelectedOptions((prev) =>
       prev.includes(option)
         ? prev.filter((item) => item !== option)
         : [...prev, option]
     );
+  
+    if (selectedOptions) {}
   };
 
   return (
