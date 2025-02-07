@@ -4,10 +4,12 @@ import { Product } from "../../../../types/cars";
 import { groq } from "next-sanity";
 import { urlFor } from "@/sanity/lib/image";
 
+// The props type should expect params as a promise that resolves to { slug: string }
 interface ProductPageProps {
-    params: { slug: string } | Promise<{ slug: string }>;
+    params: Promise<{ slug: string }>;
 }
 
+// Fetch the product by slug
 async function getProduct(slug: string): Promise<Product | null> {
     return client.fetch(
         groq`*[_type == "car" && slug.current == $slug][0]{
@@ -25,12 +27,15 @@ async function getProduct(slug: string): Promise<Product | null> {
     );
 }
 
+// Component rendering the product page
 export default async function ProductPage({ params }: ProductPageProps) {
-    // Await the promise if necessary
-    const resolvedParams = await params;
-    const product = await getProduct(resolvedParams.slug);
+    // Await the resolved params object
+    const { slug } = await params;
 
-    // Handling case when the product doesn't exist
+    // Fetch the product data by slug
+    const product = await getProduct(slug);
+
+    // Handle case when product is not found
     if (!product) {
         return <div>Product not found</div>;
     }
