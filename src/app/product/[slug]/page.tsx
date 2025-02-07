@@ -5,10 +5,10 @@ import { groq } from "next-sanity";
 import { urlFor } from "@/sanity/lib/image";
 
 interface ProductPageProps {
-    params: Promise<{ slug: string }>
+    params: { slug: string };
 }
 
-async function getProduct(slug: string): Promise<Product> {
+async function getProduct(slug: string): Promise<Product | null> {
     return client.fetch(
         groq`*[_type == "car" && slug.current == $slug][0]{
         _id,
@@ -20,19 +20,23 @@ async function getProduct(slug: string): Promise<Product> {
         transmission,
         seatingCapacity,
         brand,
-        pricePerDay,
+        pricePerDay
         }`, { slug }
-    )
+    );
 }
 
 export default async function ProductPage({ params }: ProductPageProps) {
-    const { slug } = await params;
-    const product = await getProduct(slug)
+    const product = await getProduct(params.slug);
+
+    // Handling case when the product doesn't exist
+    if (!product) {
+        return <div>Product not found</div>;
+    }
 
     return (
         <div className="max-w-7xl mx-auto px-4">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-                <div className="aspect-square ">
+                <div className="aspect-square">
                     {product.image && (
                         <Image
                             src={urlFor(product.image).url()}
@@ -44,28 +48,14 @@ export default async function ProductPage({ params }: ProductPageProps) {
                     )}
                 </div>
                 <div className="flex flex-col gap-8">
-                    <h1 className="text-4xl font-bold">
-                        {product.name}
-                    </h1>
-                    <p className="text-2xl font-sans">
-                        {product.pricePerDay}
-                         </p>
-                         <p className="text-2xl font-sans">
-                        {product.brand}
-                        </p>
-                        <p className="text-2xl font-sans">
-                             {product.fuelCapacity}
-                        </p>
-                        <p className="text-2xl font-sans">
-                            {product.seatingCapacity}                           
-                        </p>
-                       
-                        <p className="text-2xl font-sans">
-                        {product.transmission}
-                   </p>
+                    <h1 className="text-4xl font-bold">{product.name}</h1>
+                    <p className="text-2xl font-sans">{product.pricePerDay}</p>
+                    <p className="text-2xl font-sans">{product.brand}</p>
+                    <p className="text-2xl font-sans">{product.fuelCapacity}</p>
+                    <p className="text-2xl font-sans">{product.seatingCapacity}</p>
+                    <p className="text-2xl font-sans">{product.transmission}</p>
                 </div>
             </div>
-
         </div>
-    )
+    );
 }
