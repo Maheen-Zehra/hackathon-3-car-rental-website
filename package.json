@@ -9,9 +9,7 @@
     "lint": "next lint",
     "Data": "node scripts/importTemplate7Data.mjs"
   },
-  "engines": {
-    "node": "16.x"
-  },
+
   "dependencies": {
     "@sanity/image-url": "^1.1.0",
     "@sanity/vision": "^3.71.0",
