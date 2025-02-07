@@ -5,7 +5,7 @@ import { groq } from "next-sanity";
 import { urlFor } from "@/sanity/lib/image";
 
 interface ProductPageProps {
-    params: { slug: string };
+    params: { slug: string } | Promise<{ slug: string }>;
 }
 
 async function getProduct(slug: string): Promise<Product | null> {
@@ -26,7 +26,9 @@ async function getProduct(slug: string): Promise<Product | null> {
 }
 
 export default async function ProductPage({ params }: ProductPageProps) {
-    const product = await getProduct(params.slug);
+    // Await the promise if necessary
+    const resolvedParams = await params;
+    const product = await getProduct(resolvedParams.slug);
 
     // Handling case when the product doesn't exist
     if (!product) {
